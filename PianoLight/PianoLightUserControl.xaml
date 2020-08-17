@@ -1,0 +1,19 @@
+﻿<UserControl x:Class="PianoLight.PianoLightUserControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PianoLight"
+             mc:Ignorable="d" Width="500" Background="#282828" >
+    <StackPanel Orientation="Vertical" Margin="30">
+        <DockPanel>
+            <TextBlock Text="位置" Foreground="White" DockPanel.Dock="Left" VerticalAlignment="Center"/>
+            <TextBox Name="tbPosition" Margin="20,0,0,0" HorizontalAlignment="Stretch" DockPanel.Dock="Left" VerticalAlignment="Center"/>
+        </DockPanel>
+        <DockPanel>
+            <TextBlock Name="tbFileName" DockPanel.Dock="Left" VerticalAlignment="Center"/>
+            <Button Content="灯光文件" Click="GetBaseLight"/>
+        </DockPanel>
+        <Button Content="生成" Click="Build"/>
+    </StackPanel>
+</UserControl>
