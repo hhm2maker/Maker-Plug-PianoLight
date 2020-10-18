@@ -39,7 +39,6 @@ namespace PianoLight
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
                 lights = FileBusiness.CreateInstance().ReadMidiFile(openFileDialog.FileName);
-
                 tbFileName.Text = System.IO.Path.GetFileName(openFileDialog.FileName);
             }
         }
@@ -74,13 +73,14 @@ namespace PianoLight
                         lg.Add(new Light(lights[i].Time, lights[i].Action, item, lights[i].Color));
                     }
 
-                    FileBusiness.CreateInstance().WriteMidiFile(AppDomain.CurrentDomain.BaseDirectory + @"Project\" + FileUtils.projectInfo.Name+ @"\Light\" + FileUtils.pageName +"_pl_"+ item+".mid",lg);
+                    FileBusiness.CreateInstance().ReplaceControl(lg, FileBusiness.CreateInstance().midiArr);
+                    FileBusiness.CreateInstance().WriteMidiFile(AppDomain.CurrentDomain.BaseDirectory + @"Project\" + FileUtils.projectInfo.Name+ @"\Light\" + System.IO.Path.GetFileNameWithoutExtension(FileUtils.pageName) + "_pl_"+ item+".mid",lg);
 
                     if (FileUtils.pageButtonModels[item].Count == 0)
                     {
                         Operation.Model.PageButtonModel pageButtonModel = new Operation.Model.PageButtonModel();
                         LightFilePlayModel lightFilePlayModel = new LightFilePlayModel();
-                        lightFilePlayModel.FileName = FileUtils.projectInfo.Name + @"\" + System.IO.Path.GetFileNameWithoutExtension(FileUtils.pageName) + "_pl_" + item + ".mid";
+                        lightFilePlayModel.FileName = System.IO.Path.GetFileNameWithoutExtension(FileUtils.pageName) + "_pl_" + item + ".mid";
                         lightFilePlayModel.Bpm = FileUtils.projectInfo.Bpm;
                         pageButtonModel._down.OperationModels.Add(lightFilePlayModel);
                         FileUtils.pageButtonModels[item].Add(pageButtonModel);
